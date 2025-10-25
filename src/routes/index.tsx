@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { signUp, useSession } from '@/lib/auth/auth-client';
 import { useTRPC } from '@/integrations/trpc/react';
 import { useQuery } from '@tanstack/react-query';
+import { SignUp } from '@/components/sign-up';
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -17,6 +18,7 @@ function App() {
   return (
     <div>
       <p>Shortcut Zone is actively being worked on. Please check back later.</p>
+      <SignUp />
 
       <form>
         <input type="email" name="email" />
