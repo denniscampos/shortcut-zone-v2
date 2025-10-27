@@ -6,8 +6,6 @@ import {
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanStackDevtools } from '@tanstack/react-devtools';
 
-// import Header from '../components/header'
-
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools';
 
 import appCss from '../styles.css?url';
@@ -16,6 +14,8 @@ import type { QueryClient } from '@tanstack/react-query';
 
 import type { TRPCRouter } from '@/integrations/trpc/router';
 import type { TRPCOptionsProxy } from '@trpc/tanstack-react-query';
+import { Header } from '@/components/header';
+import { getUserId } from '@/lib/auth/auth-server-func';
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -24,6 +24,23 @@ interface MyRouterContext {
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
+  beforeLoad: async () => {
+    const userId = await getUserId();
+    return {
+      userId,
+    };
+  },
+  loader: async ({ context }) => {
+    if (!context.userId) {
+      return {
+        user: null,
+      };
+    }
+
+    return {
+      user: context.userId,
+    };
+  },
   head: () => ({
     meta: [
       {
@@ -49,13 +66,14 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const { user } = Route.useLoaderData();
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
-        {/* <Header /> */}
+        <Header user={user} />
         {children}
         <TanStackDevtools
           config={{

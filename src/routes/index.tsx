@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { signUp, useSession } from '@/lib/auth/auth-client';
 import { useTRPC } from '@/integrations/trpc/react';
 import { useQuery } from '@tanstack/react-query';
-import { SignUp } from '@/components/sign-up';
+import { SignUp } from '@/components/auth/sign-up';
 
 export const Route = createFileRoute('/')({
   component: App,
