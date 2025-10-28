@@ -45,9 +45,11 @@ function ErrorMessages({
 export function TextField({
   label,
   placeholder,
+  type,
 }: {
   label: string;
   placeholder?: string;
+  type?: React.ComponentProps<'input'>['type'];
 }) {
   const field = useFieldContext<string>();
   const errors = useStore(field.store, (state) => state.meta.errors);
@@ -62,6 +64,7 @@ export function TextField({
         placeholder={placeholder}
         onBlur={field.handleBlur}
         onChange={(e) => field.handleChange(e.target.value)}
+        type={type}
       />
       {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
     </div>

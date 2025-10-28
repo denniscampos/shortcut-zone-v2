@@ -36,7 +36,7 @@ export function SignIn() {
         {(field) => <field.TextField label="Email" />}
       </form.AppField>
       <form.AppField name="password">
-        {(field) => <field.TextField label="Password" />}
+        {(field) => <field.TextField label="Password" type="password" />}
       </form.AppField>
       <form.AppForm>
         <form.SubmitButton label="Sign In" />

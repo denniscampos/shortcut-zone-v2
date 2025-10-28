@@ -53,7 +53,13 @@ export function SignUp() {
       <form.AppField
         name="password"
         children={(field) => {
-          return <field.TextField label="Password" placeholder="Password" />;
+          return (
+            <field.TextField
+              label="Password"
+              placeholder="Password"
+              type="password"
+            />
+          );
         }}
       />
 
